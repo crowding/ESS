@@ -659,6 +659,37 @@ This is in addition to ess-continued-statement-offset.")
 in `arg=foo(...)' form.
 If not number, the statements are indented at open-parenthesis following foo.")
 
+(defvar ess-indent-ignore-leading-punctuation nil
+  "When computing indentation, align the first sexp to the
+computed indent, rather than the first non-whitespace-character. Useful
+for people who write in comma-first style:
+
+     x <- expression(
+         arg1
+       , arg2
+       , arg3
+     )
+
+     ( ggplot(data)
+     + aes( x = x
+          , y = y
+          , color=z)
+     + geom_point()
+     )
+")
+
+(defvar ess-leading-punctuation-offset 0
+  "Extra indent added to lines that continue a statement and
+begin with a punctuation or operator. For example with N of 2:
+
+  x <- expression(arg1 = 1,
+                  arg2 = some_complicated_term
+                    + another_complicated_term)
+"
+
+
+)
+
 (defvar ess-arg-function-offset-new-line '(2)
   "Extra indent for function arguments when ( is folowed by new line.
 
@@ -708,6 +739,20 @@ some.function(arg1,
 ;;added rmh 2Nov97 at request of Terry Therneau
 (defvar ess-close-brace-offset 0
   "Extra indentation for closing braces.")
+
+(defvar ess-close-parens-like-braces nil
+  "Closing parens should be indented like braces.
+
+expression(
+  arg1,
+  arg2(
+    arg3
+  ),
+  arg4( arg5,
+        arg6
+      )
+)
+")
 
 ;;added rmh 2Nov97 at request of Terry Therneau
 (defcustom ess-fancy-comments t
